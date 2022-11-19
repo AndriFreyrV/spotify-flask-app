@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a5b5aa527c.js" crossorigin="anonymous"></script>
+    <title>My Top Songs</title>
+    <style>
+        h3{
+            margin-bottom: 0;
+        }
+        h4{
+            margin-bottom: 0;
+        }
+        h5{
+            margin-top:4px;
+            margin-bottom:0;
+        }
+        h6{
+            margin-top: 4px;
+        }
+        .row{
+            margin-bottom:20px;
+        }
+        img{
+            max-height: 300px;
+        }
+        figcaption{
+            font-size:16px;
+        }
+        video{
+            margin-top: 40px;
+            max-width: 100%;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1 class='text-center'>My Most Played Songs on Spotify <i class="fab fa-spotify"></i></h1>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-md-offset-2 col-sm-offset-2">
+            <h3>My All Time Top Songs </h3>
+            <h5>{{user}}</h5>
+        </div>
+    </div>
+    {% for i in data %}
+        <div class="row">
+            <div class="col-md-4 col-sm-5 col-md-offset-2 col-sm-offset-2">
+                <h4>{{loop.index0 + 1}} - {{i.track_name}}</h4>
+                <h6>{{ i.artist }}</h6>
+                <img src="{{i.img_url}}" class="img-responsive" alt="Responsive image">
+                <figcaption>
+                    <div class="d-flex justify-content-around">
+                        <a href="{{i.spotify_link}}">Spotify Link</a>
+                    </div>
+                </figcaption>
+            </div>
+            <div class="col-md-4 col-sm-3 col-md-offset-1">
+                {% if i.snippet_url %}
+                    <video controls name="media">
+                        <source src="{{i.snippet_url}}" type="audio/mpeg">
+                    </video>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>
